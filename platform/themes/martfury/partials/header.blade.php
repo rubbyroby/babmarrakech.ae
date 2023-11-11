@@ -124,7 +124,7 @@
                                 @endif
                                 {!! apply_filters('after_theme_header_actions', null) !!}
                                 <div class="ps-block--user-header">
-                                    <div class="ps-block__left" style="content: ''; display: inline-block; width: 33px; height: 32px; background-image: url(https://tiendamaxima.shop/storage/login-icon.png); background-size: cover;"><i class=""></i></div>
+                                    <div class="ps-block__left" style="content: ''; display: inline-block; width: 33px; height: 32px; background-image: url(https://arabna.shop/storage/login-icon.png); background-size: cover;"><i class=""></i></div>
                                     <div class="ps-block__right">
                                         @if (auth('customer')->check())
                                             <a href="{{ route('customer.overview') }}" class="customer-name">{{ auth('customer')->user()->name }}</a>

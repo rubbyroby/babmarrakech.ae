@@ -30,8 +30,8 @@
             @if($categoriesCount > 5)
                 <div class="col-md-4 categories-list">
                     <div class="custom-image-grid-container custom-image-grid-cover">
-                        <a href="https://tiendamaxima.shop/products"> {{-- Replace with the actual route to show more categories --}}
-                            <img src="https://tiendamaxima.shop/storage/more.png" alt="More Categories">
+                        <a href="https://arabna.shop/products"> {{-- Replace with the actual route to show more categories --}}
+                            <img src="https://arabna.shop/storage/more.png" alt="More Categories">
                         </a>
                     </div>
                 </div>

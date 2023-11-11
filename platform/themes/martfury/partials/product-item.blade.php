@@ -17,12 +17,12 @@
 
             <div class="card-product_icons">
             @if (EcommerceHelper::isCompareEnabled())
-                <a class="add-to-cart-button btn" href="#" data-url="{{ route('public.compare.add', $product->id) }}" title="{{ __('Compare') }}"><img src="https://tiendamaxima.shop/storage/compare-icon-1.png" alt="Cart" style="height: 40px;"></a>
+                <a class="add-to-cart-button btn" href="#" data-url="{{ route('public.compare.add', $product->id) }}" title="{{ __('Compare') }}"><img src="https://arabna.shop/storage/compare-icon-1.png" alt="Cart" style="height: 40px;"></a>
             @endif
             @if (EcommerceHelper::isWishlistEnabled())
-                <a class="js-add-to-wishlist-button btn" href="#" data-url="{{ route('public.wishlist.add', $product->id) }}" title="{{ __('Add to Wishlist') }}"><img src="https://tiendamaxima.shop/storage/love-icon.png" alt="Cart" style="height: 40px;"></a>
+                <a class="js-add-to-wishlist-button btn" href="#" data-url="{{ route('public.wishlist.add', $product->id) }}" title="{{ __('Add to Wishlist') }}"><img src="https://arabna.shop/storage/love-icon.png" alt="Cart" style="height: 40px;"></a>
             @endif
-            <a class="js-quick-view-button btn"  href="#" data-url="{{ route('public.ajax.quick-view', $product->id) }}" title="{{ __('Quick View') }}"><img src="https://tiendamaxima.shop/storage/eye-icon.png" alt="Cart" style="height: 40px;"></a>
+            <a class="js-quick-view-button btn"  href="#" data-url="{{ route('public.ajax.quick-view', $product->id) }}" title="{{ __('Quick View') }}"><img src="https://arabna.shop/storage/eye-icon.png" alt="Cart" style="height: 40px;"></a>
         </div>
 
         <a href="{{ $product->url }}">
@@ -54,7 +54,7 @@
             <p class="product-price">{{ format_price($product->price_with_taxes) }}</p>
         </div>
         <div>
-        <a href="#" class="btn add-to-basket-btn" style="display: inline-flex; align-items: center; text-decoration: none;"> <img src="https://tiendamaxima.shop/storage/shop-icon.png" alt="Shop Icon" style="height: 16px; width: auto; margin-right: 5px;"> Add To Basket </a>
+        <a href="#" class="btn add-to-basket-btn" style="display: inline-flex; align-items: center; text-decoration: none;"> <img src="https://arabna.shop/storage/shop-icon.png" alt="Shop Icon" style="height: 16px; width: auto; margin-right: 5px;"> Add To Basket </a>
         </div>
         </div>
         </div>
