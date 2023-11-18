@@ -11,11 +11,11 @@
                                 <table class="table ps-table--shopping-cart">
                                     <thead>
                                     <tr>
-                                        <th style="background-color: #205044; color: white;">{{ __("Product's name") }}</th>
+                                        <th style="background-color: #205044; color: white; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">{{ __("Product's name") }}</th>
                                         <th style="background-color: #205044; color: white;">{{ __('Price') }}</th>
                                         <th style="background-color: #205044; color: white;">{{ __('Quantity') }}</th>
                                         <th style="background-color: #205044; color: white;">{{ __('Total') }}</th>
-                                        <th style="background-color: #205044; color: white;"></th>
+                                        <th style="background-color: #205044; color: white; border-top-right-radius: 10px; border-bottom-right-radius: 10px;"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -120,7 +120,7 @@
                                 </div>
                             @endif
                             <div class="ps-block__content">
-                                <h3>{{ __('Total') }} <span>{{ ($promotionDiscountAmount + $couponDiscountAmount) > Cart::instance('cart')->rawTotal() ? format_price(0) : format_price(Cart::instance('cart')->rawTotal() - $promotionDiscountAmount - $couponDiscountAmount) }}</span></h3>
+                                <h3 style="color: #205044;">{{ __('Total') }} <span style="color: #205044;">{{ ($promotionDiscountAmount + $couponDiscountAmount) > Cart::instance('cart')->rawTotal() ? format_price(0) : format_price(Cart::instance('cart')->rawTotal() - $promotionDiscountAmount - $couponDiscountAmount) }}</span></h3>
                                 <p><small>({{ __('Shipping fees not included') }})</small></p>
                             </div>
                         </div>

@@ -64,7 +64,7 @@
                                         {!! $categoriesDropdown ?? null !!}
                                     </ul>
                                 </div>
-                            </div><a class="ps-logo" href="{{ route('public.index') }}"><img src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ theme_option('site_title') }}" height="60"></a>
+                            </div><a class="ps-logo" href="{{ route('public.index') }}"><img src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ theme_option('site_title') }}" height="60" width="180"></a>
                         </div>
                         <div class="header__center">
                             <form class="ps-form--quick-search" action="{{ route('public.products') }}" data-ajax-url="{{ route('public.ajax.search-products') }}" method="get">
