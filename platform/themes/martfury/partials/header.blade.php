@@ -51,9 +51,9 @@
 
         <header class="header header--1" data-sticky="{{ Theme::get('stickyHeader', 'true') }}">
             <div class="header__top">
-                <div class="ps-container align-items-center">
+                <div class="ps-container align-items-center justify-content-between">
                     @if (is_plugin_active('ecommerce'))
-                        <div class="header__left">
+                        <div class="header__left row justify-content-center" style="margin-right: 25px;">
                             <div class="menu--product-categories">
                                 <div class="menu__toggle"><i class="icon-menu"></i><span> {{ __('All Categories') }}</span></div>
                                 <div class="menu__content" style="display: none">
@@ -64,7 +64,8 @@
                                         {!! $categoriesDropdown ?? null !!}
                                     </ul>
                                 </div>
-                            </div><a class="ps-logo" href="{{ route('public.index') }}"><img src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ theme_option('site_title') }}" height="60" width="180"></a>
+                            </div>
+                            <a class="ps-logo" href="{{ route('public.index') }}"><img src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ theme_option('site_title') }}" height="60" width="180"></a>
                         </div>
                         <div class="header__center">
                             <form class="ps-form--quick-search" action="{{ route('public.products') }}" data-ajax-url="{{ route('public.ajax.search-products') }}" method="get">
