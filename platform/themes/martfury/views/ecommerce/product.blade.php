@@ -133,7 +133,7 @@
 
                                     {!! apply_filters(ECOMMERCE_PRODUCT_DETAIL_EXTRA_HTML, null, $product) !!}
                                     <div class="ps-product__shopping">
-                                        <figure class="w-100">
+                                        <figure class="w-100 col-xl-12">
                                             <figcaption>{{ __('Quantity') }}</figcaption>
                                             <div class="form-group--number product__qty">
                                                 <button class="up" type="button"><i class="icon-plus"></i></button>
@@ -144,12 +144,12 @@
                                         <input type="hidden" name="id" class="hidden-product-id" value="{{ ($product->is_variation || !$product->defaultVariation->product_id) ? $product->id : $product->defaultVariation->product_id }}"/>
 
                                         @if (EcommerceHelper::isCartEnabled())
-                                            <button class="col-4 ps-btn ps-btn--black add-to-cart-button @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="add_to_cart" style="border-radius: 40px; background-color: #205044;" value="1" @if ($product->isOutOfStock()) disabled @endif>{{ __('Add to cart') }}</button>
+                                            <button class="col-lg-4 col-md-6 col-sm-6 ps-btn ps-btn--black add-to-cart-button @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="add_to_cart" style="border-radius: 40px; background-color: #205044;" value="1" @if ($product->isOutOfStock()) disabled @endif>{{ __('Add to cart') }}</button>
                                             @if (EcommerceHelper::isQuickBuyButtonEnabled())
-                                                <button class="col-4 ps-btn add-to-cart-button @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="checkout" value="1" style="border-radius: 40px; background-color: rgba(32,80,68, 0.3); color: #205044 !important;" @if ($product->isOutOfStock()) disabled @endif>{{ __('Buy Now') }}</button>
+                                                <button class="col-lg-4 col-md-6 col-sm-6 ps-btn add-to-cart-button @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="checkout" value="1" style="border-radius: 40px; background-color: rgba(32,80,68, 0.3); color: #205044 !important;" @if ($product->isOutOfStock()) disabled @endif>{{ __('Buy Now') }}</button>
                                             @endif
                                         @endif
-                                        <div class="col-3 ps-product__actions">
+                                        <div class="col-lg-3 col-md-6 col-sm-6 ps-product__actions">
                                             @if (EcommerceHelper::isWishlistEnabled())
                                                 <a class="js-add-to-wishlist-button" href="#" data-url="{{ route('public.wishlist.add', $product->id) }}"><i class="icon-heart"></i></a>
                                             @endif
