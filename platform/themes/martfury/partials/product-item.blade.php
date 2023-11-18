@@ -1,6 +1,6 @@
 @if ($product)
 
-        <div class="product-card">
+        <div class="product-card home-page-products-card">
             @if ($product->isOutOfStock())
             <div class="product_badges-tag" style="background-color:red;color:#fff">Out of Stock</div>
             @else
@@ -20,9 +20,9 @@
                 <a class="add-to-cart-button btn" href="#" data-url="{{ route('public.compare.add', $product->id) }}" title="{{ __('Compare') }}"><img src="https://arabna.shop/storage/compare-icon-1.png" alt="Cart" style="height: 40px;"></a>
             @endif
             @if (EcommerceHelper::isWishlistEnabled())
-                <a class="js-add-to-wishlist-button btn" href="#" data-url="{{ route('public.wishlist.add', $product->id) }}" title="{{ __('Add to Wishlist') }}"><img src="https://arabna.shop/storage/love-icon.png" alt="Cart" style="height: 40px;"></a>
+                <a class="js-add-to-wishlist-button btn" href="#" data-url="{{ route('public.wishlist.add', $product->id) }}" title="{{ __('Add to Wishlist') }}"><img src="https://arabna.shop/storage/love-icon.png" alt="Cart" class="wish_img_btn" style=""></a>
             @endif
-            <a class="js-quick-view-button btn"  href="#" data-url="{{ route('public.ajax.quick-view', $product->id) }}" title="{{ __('Quick View') }}"><img src="https://arabna.shop/storage/eye-icon.png" alt="Cart" style="height: 40px;"></a>
+            <a class="js-quick-view-button btn"  href="#" data-url="{{ route('public.ajax.quick-view', $product->id) }}" title="{{ __('Quick View') }}"><img src="https://arabna.shop/storage/eye-icon.png" alt="Cart" class="view_product_img_btn" style=""></a>
         </div>
 
         <a href="{{ $product->url }}">
@@ -32,7 +32,7 @@
         <div class="card-body">
             @if (EcommerceHelper::isReviewEnabled())
 
-                <div class="rating" style="position: relative; z-index: 2; text-align: center;">
+                <div class="new-rating" style="position: relative; z-index: 2; text-align: center;">
                     <!-- Three 'filled' stars for a three-star rating -->
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -54,7 +54,7 @@
             <p class="product-price">{{ format_price($product->price_with_taxes) }}</p>
         </div>
         <div>
-        <a href="#" class="btn add-to-basket-btn" style="display: inline-flex; align-items: center; text-decoration: none;"> <img src="https://arabna.shop/storage/shop-icon.png" alt="Shop Icon" style="height: 16px; width: auto; margin-right: 5px;"> Add To Basket </a>
+        <a class="btn add-to-basket-btn" id="add-to-basket-btn" data-id="{{ $product->id }}" href="#" data-url="{{ route('public.cart.add-to-cart') }}" style="display: inline-flex; align-items: center; text-decoration: none;"> <img src="https://arabna.shop/storage/shop-icon.png" alt="Shop Icon" style="height: 16px; width: auto; margin-right: 5px;"> Add To Basket </a>
         </div>
         </div>
         </div>

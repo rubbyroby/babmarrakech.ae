@@ -15,16 +15,16 @@
                  data-owl-nav="true"
                  data-owl-dots="true"
                  data-owl-item="4"
-                 data-owl-item-xs="1"
-                 data-owl-item-sm="1"
-                 data-owl-item-md="2"
+                 data-owl-item-xs="2"
+                 data-owl-item-sm="2"
+                 data-owl-item-md="3"
                  data-owl-item-lg="4"
-                 data-owl-item-xl="2"
+                 data-owl-item-xl="4"
                  data-owl-duration="1000"
                  data-owl-mousedrag="on"
             >
                 @foreach($products as $product)
-                    <div class="ps-product">
+                    <div class="ps-product featued-products-list">
                         {!! Theme::partial('product-item', compact('product')) !!}
                     </div>
                 @endforeach

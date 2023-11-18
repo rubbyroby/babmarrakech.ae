@@ -88,20 +88,7 @@
                             <div class="header__actions">
                                 {!! apply_filters('before_theme_header_actions', null) !!}
                                @php $currencies = get_all_currencies(); @endphp
-                                @if (count($currencies) > 1)
-                                    <li>
-                                        <div class="ps-dropdown">
-                                            <a href="{{ route('public.change-currency', get_application_currency()->title) }}"><span>{{ get_application_currency()->title }}</span></a>
-                                            <ul class="ps-dropdown-menu">
-                                                @foreach ($currencies as $currency)
-                                                    @if ($currency->id !== get_application_currency_id())
-                                                        <li><a href="{{ route('public.change-currency', $currency->title) }}"><span>{{ $currency->title }}</span></a></li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                @endif
+                                
                                 @if (is_plugin_active('language'))
                                     {!! Theme::partial('language-switcher') !!}
                                 @endif
@@ -164,21 +151,7 @@
                                 @if (EcommerceHelper::isOrderTrackingEnabled())
                                     <li><a href="{{ route('public.orders.tracking') }}">{{ __('Track your order') }}</a></li>
                                 @endif
-                                @php $currencies = get_all_currencies(); @endphp
-                                @if (count($currencies) > 1)
-                                    <li>
-                                        <div class="ps-dropdown">
-                                            <a href="{{ route('public.change-currency', get_application_currency()->title) }}"><span>{{ get_application_currency()->title }}</span></a>
-                                            <ul class="ps-dropdown-menu">
-                                                @foreach ($currencies as $currency)
-                                                    @if ($currency->id !== get_application_currency_id())
-                                                        <li><a href="{{ route('public.change-currency', $currency->title) }}"><span>{{ $currency->title }}</span></a></li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                @endif
+                               
                                 @if (is_plugin_active('language'))
                                     {!! Theme::partial('language-switcher') !!}
                                 @endif

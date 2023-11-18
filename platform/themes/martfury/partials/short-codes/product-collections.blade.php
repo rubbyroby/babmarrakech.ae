@@ -2,7 +2,7 @@
     <div class="ps-container">
         <div class="ps-section__header">
             <h3>{{ $title }}</h3>
-            <ul class="ps-section__links">
+            <ul class="ps-section__links" style="display:none;">
                 @foreach($productCollections as $item)
                     <li class="nav-item" role="presentation">
                         <a class="@if ($loop->first) active @endif" href="#" data-url="{{ route('public.ajax.products-by-collection', $item->id, ['limit' => $limit]) }}" role="tab" aria-controls="product-collections-product" aria-selected="true">{{ $item->name }}</a>
@@ -24,9 +24,9 @@
                      data-owl-nav="true"
                      data-owl-dots="true"
                      data-owl-item="4"
-                     data-owl-item-xs="1"
-                     data-owl-item-sm="1"
-                     data-owl-item-md="2"
+                     data-owl-item-xs="2"
+                     data-owl-item-sm="2"
+                     data-owl-item-md="3"
                      data-owl-item-lg="4"
                      data-owl-item-xl="4"
                      data-owl-duration="1000"

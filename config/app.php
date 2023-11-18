@@ -16,6 +16,9 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    
+    'mobile_app_api_key' => env('MOBILE_APP_API_KEY'),
+
 
     /*
     |--------------------------------------------------------------------------

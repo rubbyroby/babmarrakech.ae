@@ -4,7 +4,7 @@
         $options = [
             'before' => '',
             'lang_flag' => true,
-            'lang_name' => true,
+            'lang_name' => false,
             'class' => '',
             'after' => '',
         ];

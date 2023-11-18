@@ -36,15 +36,15 @@
                             </div>
                             <div class="ps-product__info">
                                 <h1>{{ $product->name }}</h1>
-                                <div class="ps-product__meta">
+                                <div class="ps-product__meta" style="display: flex;align-items: center;padding-bottom: 9px;">
                                     @if ($product->brand_id)
                                         <p>{{ __('Brand') }}: <a href="{{ $product->brand->url }}">{{ $product->brand->name }}</a></p>
                                     @endif
 
                                     @if (EcommerceHelper::isReviewEnabled() && $product->reviews_count > 0)
-                                        <div class="rating_wrap">
-                                            <a href="#tab-reviews">
-                                                <div class="rating">
+                                        <div class="rating_wrap" style="display: flex; align-items: center;">
+                                            <a href="#tab-reviews" style="display: flex; align-items: center; text-decoration: none;">
+                                                <div class="rating" style="display: flex; align-items: center; margin-right: 10px;">
                                                     <div class="product_rate" style="width: {{ $product->reviews_avg * 20 }}%"></div>
                                                 </div>
                                                 <span class="rating_num">({{ $product->reviews_count }} {{ __('reviews') }})</span>
@@ -162,7 +162,6 @@
                                 </form>
                                 <div class="ps-product__specification">
 
-                                    <p @if (!$product->sku) style="display: none" @endif><strong>{{ __('SKU') }}:</strong> <span id="product-sku">{{ $product->sku }}</span></p>
                                     @if ($product->categories->count())
                                         <p class="categories"><strong> {{ __('Categories') }}:</strong>
                                             @foreach($product->categories as $category)
@@ -171,13 +170,7 @@
                                         </p>
                                     @endif
 
-                                    @if ($product->tags->count())
-                                        <p class="tags"><strong> {{ __('Tags') }}:</strong>
-                                            @foreach($product->tags as $tag)
-                                                <a href="{{ $tag->url }}">{{ $tag->name }}</a>@if (!$loop->last),@endif
-                                            @endforeach
-                                        </p>
-                                    @endif
+                                    
                                 </div>
                                 <div class="ps-product__sharing">
                                     <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -450,9 +443,9 @@
                          data-owl-gap="0"
                          data-owl-nav="false"
                          data-owl-dots="true"
-                         data-owl-item="7"
-                         data-owl-item-xs="2"
-                         data-owl-item-sm="2"
+                         data-owl-item="4"
+                         data-owl-item-xs="1"
+                         data-owl-item-sm="1"
                          data-owl-item-md="3"
                          data-owl-item-lg="4"
                          data-owl-item-xl="6"
