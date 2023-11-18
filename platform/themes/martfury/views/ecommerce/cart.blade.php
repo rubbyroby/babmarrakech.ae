@@ -11,11 +11,11 @@
                                 <table class="table ps-table--shopping-cart">
                                     <thead>
                                     <tr>
-                                        <th>{{ __("Product's name") }}</th>
-                                        <th>{{ __('Price') }}</th>
-                                        <th>{{ __('Quantity') }}</th>
-                                        <th>{{ __('Total') }}</th>
-                                        <th></th>
+                                        <th style="background-color: #205044; color: white;">{{ __("Product's name") }}</th>
+                                        <th style="background-color: #205044; color: white;">{{ __('Price') }}</th>
+                                        <th style="background-color: #205044; color: white;">{{ __('Quantity') }}</th>
+                                        <th style="background-color: #205044; color: white;">{{ __('Total') }}</th>
+                                        <th style="background-color: #205044; color: white;"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -31,11 +31,11 @@
                                                         <div class="ps-product--cart">
                                                             <div class="ps-product__thumbnail">
                                                                 <a href="{{ $product->original_product->url }}">
-                                                                    <img src="{{ RvMedia::getImageUrl($cartItem->options['image'], 'thumb', false, RvMedia::getDefaultImage()) }}" alt="{{ $product->original_product->name }}" />
+                                                                    <img src="{{ RvMedia::getImageUrl($cartItem->options['image'], 'thumb', false, RvMedia::getDefaultImage()) }}" alt="{{ $product->original_product->name }}" class="border-rounded" />
                                                                 </a>
                                                             </div>
                                                             <div class="ps-product__content">
-                                                                <a href="{{ $product->original_product->url }}">{{ $product->original_product->name }}  @if ($product->isOutOfStock()) <span class="stock-status-label">({!! $product->stock_status_html !!})</span> @endif</a>
+                                                                <a href="{{ $product->original_product->url }}" style="color: #205044;">{{ $product->original_product->name }}  @if ($product->isOutOfStock()) <span class="stock-status-label">({!! $product->stock_status_html !!})</span> @endif</a>
                                                                 @if (is_plugin_active('marketplace') && $product->original_product->store->id)
                                                                     <p class="d-block mb-0 sold-by"><small>{{ __('Sold by') }}: <a
                                                                                 href="{{ $product->original_product->store->url }}">{{ $product->original_product->store->name }}</a></small></p>
@@ -95,12 +95,12 @@
                                 <input class="form-control coupon-code" type="text" name="coupon_code" value="{{ old('coupon_code') }}" placeholder="{{ __('Enter coupon code') }}">
                             </div>
                             <div class="form-group">
-                                <button class="ps-btn ps-btn--outline btn-apply-coupon-code" type="button" data-url="{{ route('public.coupon.apply') }}">{{ __('Apply') }}</button>
+                                <button class="ps-btn ps-btn--outline btn-apply-coupon-code" style="border-radius: 40px; color: white; border: none;" type="button" data-url="{{ route('public.coupon.apply') }}">{{ __('Apply') }}</button>
                             </div>
                         </figure>
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 ">
-                        <div class="ps-block--shopping-total">
+                        <div class="ps-block--shopping-total border-rounded">
                             <div class="ps-block__header">
                                 <p>{{ __('Subtotal') }} <span> {{ format_price(Cart::instance('cart')->rawSubTotal()) }}</span></p>
                             </div>
