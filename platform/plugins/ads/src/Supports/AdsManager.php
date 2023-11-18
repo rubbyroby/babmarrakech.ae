@@ -44,7 +44,7 @@ class AdsManager
                 continue;
             }
 
-            $image = Html::image(RvMedia::getImageUrl($item->image), $item->name, ['style' => 'max-width: 100%'])
+            $image = Html::image(RvMedia::getImageUrl($item->image), $item->name, ['style' => 'max-width: 100%; border-radius: 10px;'])
                 ->toHtml();
 
             if ($item->url) {

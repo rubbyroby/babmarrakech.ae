@@ -5,7 +5,6 @@
     Theme::set('pageId', 'product-page');
     Theme::set('headerMobile', Theme::partial('header-mobile-product'));
 @endphp
-
 <div class="ps-page--product">
     <div class="ps-container" id="app">
             <div class="ps-page__container">
@@ -19,7 +18,7 @@
                                             @foreach ($productImages as $img)
                                                 <div class="item">
                                                     <a href="{{ RvMedia::getImageUrl($img) }}">
-                                                        <img src="{{ RvMedia::getImageUrl($img) }}" alt="{{ $product->name }}"/>
+                                                        <img src="{{ RvMedia::getImageUrl($img) }}" alt="{{ $product->name }}" class="border-rounded" />
                                                     </a>
                                                 </div>
                                             @endforeach
@@ -28,14 +27,14 @@
                                 </figure>
                                 <div class="ps-product__variants" data-item="4" data-md="4" data-sm="4" data-arrow="false">
                                     @foreach ($productImages as $img)
-                                        <div class="item">
-                                            <img src="{{ RvMedia::getImageUrl($img, 'thumb') }}" alt="{{ $product->name }}"/>
+                                        <div class="item" style="border: none;">
+                                            <img src="{{ RvMedia::getImageUrl($img, 'thumb') }}" alt="{{ $product->name }}" class="border-rounded"/>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
                             <div class="ps-product__info">
-                                <h1>{{ $product->name }}</h1>
+                                <h1 style="color: #205044; font-weight: bold;">{{ $product->name }}</h1>
                                 <div class="ps-product__meta" style="display: flex;align-items: center;padding-bottom: 9px;">
                                     @if ($product->brand_id)
                                         <p>{{ __('Brand') }}: <a href="{{ $product->brand->url }}">{{ $product->brand->name }}</a></p>
@@ -52,7 +51,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                <h4 class="ps-product__price @if ($product->front_sale_price !== $product->price) sale @endif"><span>{{ format_price($product->front_sale_price_with_taxes) }}</span> @if ($product->front_sale_price !== $product->price) &nbsp;<del>{{ format_price($product->price_with_taxes) }} </del> @endif</h4>
+                                <h4 class="ps-product__price @if ($product->front_sale_price !== $product->price) sale @endif"><span style="color: #205044;">{{ format_price($product->front_sale_price_with_taxes) }}</span> @if ($product->front_sale_price !== $product->price) &nbsp;<del>{{ format_price($product->price_with_taxes) }} </del> @endif</h4>
                                 <div class="ps-product__desc">
                                     @if (is_plugin_active('marketplace') && $product->store_id)
                                         <p>{{ __('Sold By') }}: <a href="{{ $product->store->url }}"><strong>{{ $product->store->name }}</strong></a></p>
@@ -67,7 +66,7 @@
                                 @php $flashSale = $product->latestFlashSales()->first(); @endphp
 
                                 @if ($flashSale)
-                                    <div class="ps-product__countdown">
+                                    <div class="ps-product__countdown border-rounded">
                                         <figure>
                                             <figcaption> {{ __("Don't Miss Out! This promotion will expires in") }}</figcaption>
                                             <ul class="ps-countdown" data-time="{{ $flashSale->end_date }}">
@@ -134,7 +133,7 @@
 
                                     {!! apply_filters(ECOMMERCE_PRODUCT_DETAIL_EXTRA_HTML, null, $product) !!}
                                     <div class="ps-product__shopping">
-                                        <figure>
+                                        <figure class="w-100">
                                             <figcaption>{{ __('Quantity') }}</figcaption>
                                             <div class="form-group--number product__qty">
                                                 <button class="up" type="button"><i class="icon-plus"></i></button>
@@ -145,12 +144,12 @@
                                         <input type="hidden" name="id" class="hidden-product-id" value="{{ ($product->is_variation || !$product->defaultVariation->product_id) ? $product->id : $product->defaultVariation->product_id }}"/>
 
                                         @if (EcommerceHelper::isCartEnabled())
-                                            <button class="ps-btn ps-btn--black add-to-cart-button @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="add_to_cart" value="1" @if ($product->isOutOfStock()) disabled @endif>{{ __('Add to cart') }}</button>
+                                            <button class="col-4 ps-btn ps-btn--black add-to-cart-button @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="add_to_cart" style="border-radius: 40px; background-color: #205044;" value="1" @if ($product->isOutOfStock()) disabled @endif>{{ __('Add to cart') }}</button>
                                             @if (EcommerceHelper::isQuickBuyButtonEnabled())
-                                                <button class="ps-btn add-to-cart-button @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="checkout" value="1" @if ($product->isOutOfStock()) disabled @endif>{{ __('Buy Now') }}</button>
+                                                <button class="col-4 ps-btn add-to-cart-button @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="checkout" value="1" style="border-radius: 40px; background-color: rgba(32,80,68, 0.3); color: #205044 !important;" @if ($product->isOutOfStock()) disabled @endif>{{ __('Buy Now') }}</button>
                                             @endif
                                         @endif
-                                        <div class="ps-product__actions">
+                                        <div class="col-3 ps-product__actions">
                                             @if (EcommerceHelper::isWishlistEnabled())
                                                 <a class="js-add-to-wishlist-button" href="#" data-url="{{ route('public.wishlist.add', $product->id) }}"><i class="icon-heart"></i></a>
                                             @endif
@@ -181,8 +180,8 @@
                             </div>
                         </div>
                         <div class="ps-product__content ps-tab-root">
-                            <ul class="ps-tab-list">
-                                <li class="active"><a href="#tab-description">{{ __('Description') }}</a></li>
+                            <ul class="ps-tab-list" >
+                                <li class="active"  style="border-color: #205044;"><a href="#tab-description">{{ __('Description') }}</a></li>
                                 @if (EcommerceHelper::isReviewEnabled())
                                     <li><a href="#tab-reviews">{{ __('Reviews') }}&nbsp;({{ $product->reviews_count }})</a></li>
                                 @endif
@@ -370,7 +369,7 @@
 
                                 @if (is_plugin_active('marketplace') && $product->store_id)
                                     <div class="ps-tab" id="tab-vendor">
-                                        <h4>{{ $product->store->name }}</h4>
+                                        <h4 style="color: #205044; font-weight: bold;">{{ $product->store->name }}</h4>
                                         <div>
                                             {!! BaseHelper::clean($product->store->content) !!}
                                         </div>
@@ -409,7 +408,7 @@
                     </div>
                 </div>
                 <div class="ps-page__right">
-                    <aside class="widget widget_product widget_features">
+                    <aside class="widget widget_product widget_features border-rounded">
                         @for ($i = 1; $i <= 5; $i++)
                             @if (theme_option('product_feature_' . $i . '_title'))
                                 <p><i class="{{ theme_option('product_feature_' . $i . '_icon') }}"></i> {{ theme_option('product_feature_' . $i . '_title') }}</p>
