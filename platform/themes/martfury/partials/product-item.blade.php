@@ -1,6 +1,7 @@
 @if ($product)
 
         <div class="product-card home-page-products-card">
+            
             @if ($product->isOutOfStock())
             <div class="product_badges-tag" style="background-color:red;color:#fff">Out of Stock</div>
             @else
@@ -31,27 +32,28 @@
             <hr class="card-divider">
         <div class="card-body">
             @if (EcommerceHelper::isReviewEnabled())
-
+            <div class="rating_wrap">
                 <div class="new-rating" style="position: relative; z-index: 2; text-align: center;">
-                    <!-- Three 'filled' stars for a three-star rating -->
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <!-- Two 'empty' stars to complete the five-star scale -->
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
+                    <!-- Dynamic star rating based on product review average -->
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $product->reviews_avg)
+                            <i class="fas fa-star"></i> <!-- Filled star -->
+                        @else
+                            <i class="far fa-star"></i> <!-- Empty star -->
+                        @endif
+                    @endfor
                 </div>
-            @endif
+            </div>
+        @endif
+        
 
         <div spellcheck="z-index:1;">
             @if (is_plugin_active('marketplace') && $product->store->id)
             <span class="shop-name-title"><a class="shop-name-title" href="{{ $product->store->url }}">{{ $product->store->name }}</a></span>
             @endif
 
-            <h5 class="product-card-title"><a class="ps-product__title" href="{{ $product->url }}">{!! BaseHelper::clean($product->name) !!}</a></h5>
-            <span class="product-country">UAE</span><br>
-            <span class="product-dementions">6 X 245 Ml / Pack</span><br>
-            <p class="product-price">{{ format_price($product->price_with_taxes) }}</p>
+            <a class="ps-product__title" href="{{ $product->url }}" style="color: black;"><h3 class="product-card-title"> <span class="span-product-name">{!! BaseHelper::clean($product->name) !!}</span></h3></a>
+            <p class="product-price @if ($product->front_sale_price !== $product->price) sale @endif">{{ format_price($product->front_sale_price_with_taxes) }} @if ($product->front_sale_price !== $product->price) <del>{{ format_price($product->price_with_taxes) }} </del> @endif</p>
         </div>
         <div>
         <a class="btn add-to-basket-btn" id="add-to-basket-btn" data-id="{{ $product->id }}" href="#" data-url="{{ route('public.cart.add-to-cart') }}" style="display: inline-flex; align-items: center; text-decoration: none;"> <img src="https://arabna.shop/storage/shop-icon.png" alt="Shop Icon" style="height: 16px; width: auto; margin-right: 5px;"> Add To Basket </a>

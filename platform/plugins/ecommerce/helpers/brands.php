@@ -5,7 +5,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 if (! function_exists('get_featured_brands')) {
-    function get_featured_brands(int $limit = 8, array $with = ['slugable'], array $withCount = []): Collection|LengthAwarePaginator
+    function get_featured_brands(int $limit = 1000, array $with = ['slugable'], array $withCount = []): Collection|LengthAwarePaginator
     {
         return Brand::query()
             ->where('is_featured', true)

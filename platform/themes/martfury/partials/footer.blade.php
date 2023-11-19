@@ -31,6 +31,8 @@
                         <p class="instagram_user" style="color: #fff; font-family: Neoradical; font-size: 34px;">
                             @BabMarrakech</p>
                     </div>
+
+        
                 </div>
                 <div class="col-12">
                     <span class="download-our-app-text">Download our app</h2>
@@ -57,6 +59,7 @@
 
         </div>
         @endif
+
         <div class="ps-footer__copyright">
             <p>{{ theme_option('copyright') }}</p>
             @php $paymentMethods = array_filter(json_decode(theme_option('payment_methods', []), true)); @endphp
@@ -78,8 +81,9 @@
                 </p>
             </div>
             @endif
+    
         </div>
-    </div>
+    </>
 </footer>
 
 @if (is_plugin_active('newsletter') && theme_option('enable_newsletter_popup', 'yes') === 'yes')
