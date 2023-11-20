@@ -18,10 +18,10 @@
                         @foreach($brands as $brand)
                             @if($brand->logo && $brand->logo !== "NULL")
                                 @if($count % 5 == 0)
-                                    <div class="w-100"></div> <!-- Add a new row after every 5 logos -->
+                                    <div class="w-100 display-none"></div><!--  Add a new row after every 5 logos -->
                                 @endif
                                 @if($count < 10)
-                                    <div class="col-lg-2 col-md-3 col-sm-4 col-6 partner-logo"><img src="{{ RvMedia::getImageUrl($brand->logo, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $brand->name }}"></div>
+                                    <div class="col-lg-2 col-md-3 col-sm-6 col-6 partner-logo"><a href="/products?brands%5B%5D={{$brand->id}}"><img src="{{ RvMedia::getImageUrl($brand->logo, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $brand->name }}"></a></div>
                                     @php
                                         $count++;
                                     @endphp

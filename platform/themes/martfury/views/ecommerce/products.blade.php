@@ -4,9 +4,11 @@
             <div class="mt-40">
                 <div class="ps-shop-brand">
                     @foreach(get_featured_brands() as $brand)
-                        <a href="{{ $brand->website }}">
-                            <img src="{{ RvMedia::getImageUrl($brand->logo, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $brand->name }}" loading="lazy"/>
-                        </a>
+                        @if($brand->logo && $brand->logo !== "NULL")
+                            <a href="{{ $brand->website }}">
+                                <img src="{{ RvMedia::getImageUrl($brand->logo, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $brand->name }}" loading="lazy"/>
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -53,7 +55,7 @@
                                      data-owl-item-sm="1"
                                      data-owl-item-md="3"
                                      data-owl-item-lg="4"
-                                     data-owl-item-xl="6"
+                                     data-owl-item-xl="4"
                                      data-owl-duration="1000"
                                      data-owl-mousedrag="on"
                                 >
