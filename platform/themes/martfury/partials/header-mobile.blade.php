@@ -43,9 +43,8 @@
                         </div>
                     </div>
                     {!! apply_filters('after_theme_header_mobile_actions', null) !!}
-                    <div class="ps-block--user-header">
-                        <div class="ps-block__left"><a href="{{ route('customer.overview') }}"><i class="icon-user"></i></a></div>
-                    </div>
+                    
+                    {!! Theme::partial('language-switcher') !!}
                 </div>
             </div>
         @endif

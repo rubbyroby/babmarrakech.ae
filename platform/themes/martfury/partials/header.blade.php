@@ -81,7 +81,11 @@
                                     <i class="fa fa-spin fa-spinner"></i>
                                 </div>
                                 {{-- <button type="submit">{{ __('Search') }}</button> --}}
-<button type="submit" aria-label="Search" style="background: #000; color: #fff; border: none; padding: 8px 16px; font-size: 16px; border-radius: 0 25px 25px 0; display: flex; align-items: center; justify-content: center; border: 2px solid white;"> <i class="fas fa-search"></i> </button>
+                                @if(__("I'm shopping for...") == "I'm shopping for...")
+                                    <button type="submit" aria-label="Search" style="background: #000; color: #fff; border: none; padding: 8px 16px; font-size: 16px; border-radius: 0 25px 25px 0; display: flex; align-items: center; justify-content: center; border: 2px solid white;"> <i class="fas fa-search"></i> </button>
+                                @else
+                                    <button type="submit" aria-label="Search" style="background: #000; color: #fff; border: none; padding: 8px 16px; font-size: 16px; border-radius: 25px 0 0 25px; display: flex; align-items: center; justify-content: center; border: 2px solid white;"> <i class="fas fa-search"></i> </button>
+                                @endif
                                 <div class="ps-panel--search-result"></div>
                             </form>
                         </div>
