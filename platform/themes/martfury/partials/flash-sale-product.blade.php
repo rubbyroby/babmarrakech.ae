@@ -11,7 +11,7 @@
                     @endforeach
                 @else
                     @if ($product->front_sale_price !== $product->price)
-                            <div class="product_badges-tag" style="background-color: red !important;color:#fff !important; border-radius: 8px; top: 4px; left: 4px; font-size: 1.2rem; box-shadow: 0 3px 8px rgba(0,0,0,.05);">{{ get_sale_percentage($product->price, $product->front_sale_price) }}</div>
+                            <div class="product_badges-tag" style="left: 4px; top: 4px; font-size: 14px; font-weight: bold;">{{ get_sale_percentage($product->price, $product->front_sale_price) }}</div>
                     @endif
                 @endif
             @endif
