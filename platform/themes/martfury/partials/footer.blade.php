@@ -53,15 +53,9 @@
 
             {!! dynamic_sidebar('footer_sidebar') !!}
         </div>
-        @if (Widget::group('bottom_footer_sidebar')->getWidgets())
-        <div class="ps-footer__links" id="footer-links" style="color:#000 !important">
-            {!! dynamic_sidebar('bottom_footer_sidebar') !!}
-
-        </div>
-        @endif
 
         <div class="ps-footer__copyright">
-            <p>{{ theme_option('copyright') }}</p>
+            <p style="color: white;">{{ theme_option('copyright') }}</p>
             @php $paymentMethods = array_filter(json_decode(theme_option('payment_methods', []), true)); @endphp
             @if ($paymentMethods)
             <div class="footer-payments">
