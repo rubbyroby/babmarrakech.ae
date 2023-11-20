@@ -51,7 +51,7 @@ if (! function_exists('format_price')) {
         if ($useSymbol && $currency->is_prefix_symbol) {
             $space = (int)get_ecommerce_setting('add_space_between_price_and_currency', 0) == 1 ? ' ' : null;
 
-            return $currency->symbol . $space . human_price_text($price, $currency);
+            return $space . human_price_text($price, $currency);
         }
 
         return human_price_text($price, $currency, ($useSymbol ? $currency->symbol : $currency->title));

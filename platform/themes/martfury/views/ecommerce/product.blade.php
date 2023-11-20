@@ -107,7 +107,7 @@
 
                                     {!! render_product_options($product) !!}
 
-                                    <div class="number-items-available mb-3">
+                                    <!-- <div class="number-items-available mb-3">
                                         @if ($product->isOutOfStock())
                                             <span class="text-danger">({{ __('Out of stock') }})</span>
                                         @else
@@ -129,7 +129,7 @@
                                                 @endif
                                             @endif
                                         @endif
-                                    </div>
+                                    </div> -->
 
                                     {!! apply_filters(ECOMMERCE_PRODUCT_DETAIL_EXTRA_HTML, null, $product) !!}
                                     <div class="ps-product__shopping">

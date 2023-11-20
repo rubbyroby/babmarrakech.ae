@@ -35,7 +35,7 @@
 
     <style>
         :root {
-            --primary-font: '{{ theme_option('primary_font', 'Muli') }}', sans-serif;
+            --primary-font: 'outfit', sans-serif;
             --primary-color: {{ theme_option('primary_color', '#fab528') }};
         }
     </style>
