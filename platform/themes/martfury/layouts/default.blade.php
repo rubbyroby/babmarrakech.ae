@@ -1,5 +1,5 @@
 {!! Theme::partial('header') !!}
-<div class="ps-breadcrumb"  style="background-color: #205044;">
+<div class="ps-breadcrumb"  style="background-color: #fff;">
     <div class="ps-container">
         {!! Theme::partial('breadcrumbs') !!}
     </div>

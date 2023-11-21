@@ -135,7 +135,7 @@
                 <div class="ps-container">
                     <div class="navigation__left">
                         <div class="menu--product-categories">
-                            <div class="menu__toggle"><i class="icon-menu"></i><span> {{ __('All Categories') }}</span></div>
+                            <div class="menu__toggle"><i class="icon-menu"></i><span style="color:#fff !important"> {{ __('All Categories') }}</span></div>
                             <div class="menu__content" style="display: none">
                                 <ul class="menu--dropdown">
                                     {!! $categoriesDropdown ?? null !!}

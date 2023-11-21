@@ -4,11 +4,9 @@
             <div class="mt-40">
                 <div class="ps-shop-brand">
                     @foreach(get_featured_brands() as $brand)
-                        @if($brand->logo && $brand->logo !== "NULL")
-                            <a href="{{ $brand->website }}">
-                                <img src="{{ RvMedia::getImageUrl($brand->logo, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $brand->name }}" loading="lazy"/>
-                            </a>
-                        @endif
+                        <a href="{{ $brand->website }}">
+                            <img src="{{ RvMedia::getImageUrl($brand->logo, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $brand->name }}" loading="lazy"/>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -50,12 +48,12 @@
                                      data-owl-gap="0"
                                      data-owl-nav="false"
                                      data-owl-dots="true"
-                                     data-owl-item="4"
-                                     data-owl-item-xs="1"
-                                     data-owl-item-sm="1"
+                                     data-owl-item="7"
+                                     data-owl-item-xs="2"
+                                     data-owl-item-sm="2"
                                      data-owl-item-md="3"
                                      data-owl-item-lg="4"
-                                     data-owl-item-xl="4"
+                                     data-owl-item-xl="6"
                                      data-owl-duration="1000"
                                      data-owl-mousedrag="on"
                                 >
@@ -69,6 +67,44 @@
                         </div>
                     </div>
                 @endif
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8" style="margin-bottom: 1em;">
+                        <div id="horizontal-nav">
+                          <div class="btn-prev" role="button" tabindex="0">
+                            <svg viewBox="0 0 24 24">
+                              <path d="M8.59,16.59L13.17,12L8.59,7.41L10,6l6,6l-6,6L8.59,16.59z" fill="hsl(141, 15%, 50%)">
+                              </path>
+                            </svg>
+                          </div>
+                          <div class="menu-wrap">
+                            <ul class="menu">
+                              <li class="list-item">
+                                <a href="" class="pill">&nbsp;&nbsp;&nbsp;Sub Categorie 1</a>
+                              </li>
+                              <li class="list-item">
+                                <a class="pill" href="#">Sub Categorie 2</a>
+                              </li>
+                              <li class="list-item">
+                                <a class="pill">Sub Categorie 3</a>
+                              </li>
+                              <li class="list-item">
+                                <a class="pill" href="">Sub Categorie 4</a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="btn-next" role="button">
+                            <svg viewBox="0 0 24 24">
+                              <path d="M8.59,16.59L13.17,12L8.59,7.41L10,6l6,6l-6,6L8.59,16.59z" fill="hsl(141, 15%, 50%)">
+                              </path>
+                            </svg>
+                          </div>
+                        </div>
+                    </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
                 <div class="ps-shopping ps-tab-root">
                     <div class="bg-light py-2 mb-3">
                         <div class="container-fluid">
