@@ -7,7 +7,7 @@
 @endphp
 <div class="ps-page--product">
     <div class="ps-container" id="app">
-            <div class="ps-page__container">
+            <div class="ps-page__container d-flex justify-content-center">
                 <div class="ps-page__left">
                     <div class="ps-product--detail ps-product--fullwidth">
                         <div class="ps-product__header">
@@ -97,7 +97,7 @@
                                 <form class="add-to-cart-form" method="POST" action="{{ route('public.cart.add-to-cart') }}">
                                     @csrf
                                     @if ($product->variations()->count() > 0)
-                                        <div class="pr_switch_wrap">
+                                        <div class="pr_switch_wrap col-12 mb-10">
                                             {!! render_product_swatches($product, [
                                                 'selected' => $selectedAttrs,
                                                 'view'     => Theme::getThemeNamespace() . '::views.ecommerce.attributes.swatches-renderer'
@@ -133,7 +133,7 @@
 
                                     {!! apply_filters(ECOMMERCE_PRODUCT_DETAIL_EXTRA_HTML, null, $product) !!}
                                     <div class="ps-product__shopping">
-                                        <figure class="w-100 col-xl-12">
+                                        <figure class="w-100 col-xl-3">
                                             <figcaption>{{ __('Quantity') }}</figcaption>
                                             <div class="form-group--number product__qty">
                                                 <button class="up" type="button"><i class="icon-plus"></i></button>
@@ -407,20 +407,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="ps-page__right">
-                    <aside class="widget widget_product widget_features border-rounded">
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if (theme_option('product_feature_' . $i . '_title'))
-                                <p><i class="{{ theme_option('product_feature_' . $i . '_icon') }}"></i> {{ theme_option('product_feature_' . $i . '_title') }}</p>
-                            @endif
-                        @endfor
-                    </aside>
-                    @if (is_plugin_active('ads'))
-                        <aside class="widget">
-                            {!! AdsManager::display('product-sidebar') !!}
-                        </aside>
-                    @endif
-                </div>
+                <!--<div class="ps-page__right">-->
+                <!--    <aside class="widget widget_product widget_features border-rounded">-->
+                <!--        @for ($i = 1; $i <= 5; $i++)-->
+                <!--            @if (theme_option('product_feature_' . $i . '_title'))-->
+                <!--                <p><i class="{{ theme_option('product_feature_' . $i . '_icon') }}"></i> {{ theme_option('product_feature_' . $i . '_title') }}</p>-->
+                <!--            @endif-->
+                <!--        @endfor-->
+                <!--    </aside>-->
+                <!--    @if (is_plugin_active('ads'))-->
+                <!--        <aside class="widget">-->
+                <!--            {!! AdsManager::display('product-sidebar') !!}-->
+                <!--        </aside>-->
+                <!--    @endif-->
+                <!--</div>-->
             </div>
 
             @php

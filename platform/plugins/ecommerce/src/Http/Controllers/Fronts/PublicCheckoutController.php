@@ -38,6 +38,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use GuzzleHttp\Client;
 
 class PublicCheckoutController
 {
@@ -627,6 +628,52 @@ class PublicCheckoutController
         do_action('ecommerce_post_checkout', $products, $request, $token, $sessionData);
 
         if (is_plugin_active('marketplace')) {
+            
+            try {
+                $client = new Client();
+                $order = Order::query()->where(compact('token'))->first();
+
+                $order = $this->createOrderFromData($request->input(), $order);
+            
+                $phone = "971503576823";
+                $fullname = $sessionData['name'];
+                $customerPhone = $sessionData['phone'];
+                $email = $sessionData['email'];
+                $address = $sessionData['marketplace']['6']['address'].', '.$sessionData['marketplace']['6']['city'].', '.$sessionData['marketplace']['6']['state'];
+                $paymentMethod = "Cash on delivery (COD)";
+                $paymentStatus = "PENDING";
+                $orderNumber = "#100000".$order->id;
+
+
+                $whatsapp_data = array(
+                    'phone' => $phone,
+                    'fullname' => $fullname,
+                    'customerPhone' => $customerPhone,
+                    'email' => $email,
+                    'address' => $address,
+                    'paymentMethod' => $paymentMethod,
+                    'paymentStatus' => $paymentStatus,
+                    'orderNumber' => $orderNumber,
+                // Add more key-value pairs as needed
+                );
+
+                if ($phone) {
+                        
+                        // Set the endpoint URL of your Node.js server
+                        $endpointUrl = 'http://161.97.121.247:3000/incoming-data';
+                        // Make the POST request
+                        $promise = $client->postAsync($endpointUrl, [
+                            'json' => $whatsapp_data, 
+                        ]);
+                        // Wait for the asynchronous request to complete
+                        $_response = $promise->wait();
+
+                            
+                }
+                
+            } catch (\Exception $e) {
+            }
+            
             return apply_filters(
                 HANDLE_PROCESS_POST_CHECKOUT_ORDER_DATA_ECOMMERCE,
                 $products,
@@ -826,8 +873,28 @@ class PublicCheckoutController
             ->setMessage(__('Checkout successfully!'));
     }
 
-    public function getCheckoutSuccess(string $token, BaseHttpResponse $response)
+    public function getCheckoutSuccess(string $token, BaseHttpResponse $response, Request $request)
     {
+        // if($this->checkPaymentStatus() == 'FAILED'){
+        //     $order = Order::query()
+        //     ->where('token', $token)
+        //     ->with(['address', 'products', 'taxInformation'])
+        //     ->orderByDesc('id')
+        //     ->first();
+
+        //     $shipment = Shipment::query()
+        //     ->where('order_id', $order->id)
+        //     ->first();
+
+        //     $shipment->delete();
+        //     $order->delete();
+
+        //     return $response
+        //         ->setError()
+        //         ->setNextUrl(PaymentHelper::getCancelURL())
+        //         ->setMessage(__('Payment failed!'));
+        // }
+        
         if (! EcommerceHelper::isCartEnabled()) {
             abort(404);
         }
@@ -841,7 +908,11 @@ class PublicCheckoutController
         if (! $order) {
             abort(404);
         }
-
+        
+        // if(session()->has('order-reference-type') && session('order-reference-type') == 'card'){
+        //     $order->payment_id = $request->query()['ref'];
+        // }
+        
         if (is_plugin_active('payment') && (float)$order->amount && ! $order->payment_id) {
             return $response
                 ->setError()
@@ -1034,4 +1105,47 @@ class PublicCheckoutController
 
         return $order;
     }
+    
+    public function checkPaymentStatus()
+    {
+        if(!session()->has('order-reference-type') && session('order-reference-type') != 'card'){
+            return '';
+        }
+        
+        $outletRef = "b9bc0cb8-2586-4954-b76e-7d008e4173c6";
+        $apikey = "ZjIyZTc4YTEtYTQzMC00MWZlLWI0NDEtZGJhY2E1NTYwM2I2OmY3NmRhNzlkLWYzYmEtNDY2Ni1iYmIwLTdkYWQ5YzY2ZjU0NA==";
+        $orderReferencePayment = session('order-reference-payment');
+
+        $idServiceURL = "https://api-gateway.ngenius-payments.com/identity/auth/access-token";
+        $retrieveOrderStatus = "https://api-gateway.ngenius-payments.com/transactions/outlets/$outletRef/orders/$orderReferencePayment";
+
+        $client = new Client();
+
+        // Fetch the access token
+        $response = $client->post($idServiceURL, [
+            'headers' => [
+                'Authorization' => 'Basic ' . $apikey,
+                'Content-Type' => 'application/vnd.ni-identity.v1+json',
+            ],
+        ]);
+
+        $tokenResponse = json_decode($response->getBody());
+        $access_token = $tokenResponse->access_token;
+
+        $response = $client->get($retrieveOrderStatus, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $access_token,
+                'Content-Type' => 'application/vnd.ni-payment.v2+json',
+                'Accept' => 'application/vnd.ni-payment.v2+json',
+            ],
+        ]);
+
+        $retrieveOrderStatusResponse = json_decode($response->getBody());
+        $payment = $retrieveOrderStatusResponse->_embedded->payment[0]->state;
+        
+        session(['order-reference-type' => '']);
+        // Redirect to the payment link
+        return $payment;
+    }
+    
 }

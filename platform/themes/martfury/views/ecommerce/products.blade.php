@@ -1,12 +1,16 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 <div class="ps-page--shop">
     <div @if (Route::currentRouteName() == 'public.products') id="app" @endif>
         @if (theme_option('show_featured_brands_on_products_page', 'yes') == 'yes' &&  Route::currentRouteName() == 'public.products')
             <div class="mt-40">
                 <div class="ps-shop-brand">
                     @foreach(get_featured_brands() as $brand)
-                        <a href="{{ $brand->website }}">
-                            <img src="{{ RvMedia::getImageUrl($brand->logo, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $brand->name }}" loading="lazy"/>
-                        </a>
+                        @if($brand->logo && $brand->logo !== "NULL")
+                            <a href="{{ $brand->website }}">
+                                <img src="{{ RvMedia::getImageUrl($brand->logo, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $brand->name }}" loading="lazy"/>
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -48,12 +52,12 @@
                                      data-owl-gap="0"
                                      data-owl-nav="false"
                                      data-owl-dots="true"
-                                     data-owl-item="7"
+                                     data-owl-item="4"
                                      data-owl-item-xs="2"
                                      data-owl-item-sm="2"
                                      data-owl-item-md="3"
                                      data-owl-item-lg="4"
-                                     data-owl-item-xl="6"
+                                     data-owl-item-xl="4"
                                      data-owl-duration="1000"
                                      data-owl-mousedrag="on"
                                 >
@@ -67,44 +71,66 @@
                         </div>
                     </div>
                 @endif
-                    <div class="row">
-                        <div class="col-2">
-                        </div>
-                        <div class="col-8" style="margin-bottom: 1em;">
-                        <div id="horizontal-nav">
-                          <div class="btn-prev" role="button" tabindex="0">
-                            <svg viewBox="0 0 24 24">
-                              <path d="M8.59,16.59L13.17,12L8.59,7.41L10,6l6,6l-6,6L8.59,16.59z" fill="hsl(141, 15%, 50%)">
-                              </path>
-                            </svg>
-                          </div>
-                          <div class="menu-wrap">
-                            <ul class="menu">
-                              <li class="list-item">
-                                <a href="" class="pill">&nbsp;&nbsp;&nbsp;Sub Categorie 1</a>
-                              </li>
-                              <li class="list-item">
-                                <a class="pill" href="#">Sub Categorie 2</a>
-                              </li>
-                              <li class="list-item">
-                                <a class="pill">Sub Categorie 3</a>
-                              </li>
-                              <li class="list-item">
-                                <a class="pill" href="">Sub Categorie 4</a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="btn-next" role="button">
-                            <svg viewBox="0 0 24 24">
-                              <path d="M8.59,16.59L13.17,12L8.59,7.41L10,6l6,6l-6,6L8.59,16.59z" fill="hsl(141, 15%, 50%)">
-                              </path>
-                            </svg>
-                          </div>
+                
+@php
+
+ [$categories] =
+EcommerceHelper::dataForFilter($category ?? null);
+
+
+$subcategories = [];
+    foreach ($categories as $category) {
+        if ($category->parent_id != 0) {
+            $subcategories[] = $category;
+        }
+    }
+
+@endphp
+                 <div class="row">
+                    <div class="col-12">
+                        <div class="partner-container py-3 text-center">
+                            <section>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="owl-carousel owl-theme">
+                                            @foreach($subcategories as $subcategory)
+                                                @if($subcategory->icon_image != '')
+                                                    @if(__("I'm shopping for...") == "I'm shopping for...")
+                                                        <div class="item">
+                                                            <a href="https://babmarrakesh.ae/product-categories/{{ str_replace('product-categories/', '', $subcategory->url) }}">
+                                                                <img src="{{ url('/storage/' . $subcategory->icon_image) }}" alt="{{ $subcategory->name }}" style="max-width : 150px !important;">
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                    @php
+                                                        $url = $subcategory->icon_image;
+
+                                                        // Extract the path and filename from the URL
+                                                        $pathInfo = pathinfo($url);
+
+                                                        // Append '-ar' to the filename
+                                                        $newFilename = $pathInfo['filename'] . '-ar';
+
+                                                        // Build the new URL with the modified filename
+                                                        $newUrl = $pathInfo['dirname'] . '/' . $newFilename . '.' . $pathInfo['extension'];
+
+                                                    @endphp
+                                                        <div class="item">
+                                                            <a href="{{ str_replace('product-categories/', '', $subcategory->url) }}">
+                                                            <img src="{{ url('/storage/' . $newUrl) }}" alt="{{ $subcategory->name }}" style="max-width : 150px !important;">
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
-                        <div class="col-2">
-                        </div>
-                    </div>
+                </div>
+
                 <div class="ps-shopping ps-tab-root">
                     <div class="bg-light py-2 mb-3">
                         <div class="container-fluid">
@@ -144,3 +170,29 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    rtl: true,
+    items: 5,
+    lazyLoad: true,
+    responsive:{
+        0:{
+            items:3
+        },
+        600:{
+            items:5
+        },
+        1000:{
+            items:7
+        }
+    }
+})
+</script>
+

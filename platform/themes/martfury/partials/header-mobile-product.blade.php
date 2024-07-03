@@ -1,7 +1,7 @@
 <header class="header header--mobile header--mobile-product" data-sticky="true">
     <div class="navigation--mobile">
         <div class="navigation__left">
-            <a class="header__back" href="{{ route('public.products') }}"><i class="icon-chevron-left"></i><strong>{{ __('Back to Products') }}</strong></a>
+            <a class="header__back" href="{{ url()->previous() }}"><i class="icon-chevron-left"></i><strong>{{ __('Back to Products') }}</strong></a>
         </div>
         @if (is_plugin_active('ecommerce'))
             <div class="navigation__right">

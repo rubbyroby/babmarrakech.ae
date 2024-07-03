@@ -8,7 +8,7 @@ EcommerceHelper::dataForFilter($category ?? null);
                 ->add('custom-scrollbar-js', 'plugins/mcustom-scrollbar/jquery.mCustomScrollbar.js', ['jquery']);
 @endphp
 
-<aside class="widget widget_shop">
+<aside class="widget widget_shop" style="display:none">
     <h4 class="widget-title">{{ __('Product Categories') }}</h4>
     <div class="widget-product-categories">
         @include(Theme::getThemeNamespace('views.ecommerce.includes.categories'), [
@@ -25,30 +25,18 @@ EcommerceHelper::dataForFilter($category ?? null);
         <h4 class="widget-title">{{ __('By Brands') }}</h4>
         <figure class="ps-custom-scrollbar">
             @foreach($brands as $brand)
-                <div class="ps-checkbox">
-                    <input class="form-control product-filter-item" type="checkbox" name="brands[]" id="brand-{{ $rand }}-{{ $brand->id }}" value="{{ $brand->id }}" @if (in_array($brand->id, (array)request()->input('brands', []))) checked @endif>
-                    <label for="brand-{{ $rand }}-{{ $brand->id }}"><span>{{ $brand->name }} <span class="d-inline-block">({{ $brand->products_count }})</span> </span></label>
+                <div class="ps-checkbox" style="color:#fff !important;border:#fff">
+                    <input class="form-control product-filter-item" type="checkbox" name="brands[]" style="color:#fff;border:#fff" id="brand-{{ $rand }}-{{ $brand->id }}" value="{{ $brand->id }}" @if (in_array($brand->id, (array)request()->input('brands', []))) checked @endif>
+                    <label class="brand_filterhu" for="brand-{{ $rand }}-{{ $brand->id }}" style="color:#fff !important"><span>{{ $brand->name }} <span class="d-inline-block">({{ $brand->products_count }})</span> </span></label>
                 </div>
             @endforeach
         </figure>
     </aside>
 @endif
 
-@if ($tags->isNotEmpty())
-    <aside class="widget widget_shop">
-        <h4 class="widget-title">{{ __('By Tags') }}</h4>
-        <figure class="ps-custom-scrollbar">
-            @foreach($tags as $tag)
-                <div class="ps-checkbox">
-                    <input class="form-control product-filter-item" type="checkbox" name="tags[]" id="tag-{{ $rand }}-{{ $tag->id }}" value="{{ $tag->id }}" @if (in_array($tag->id, (array)request()->input('tags', []))) checked @endif>
-                    <label for="tag-{{ $rand }}-{{ $tag->id }}"><span>{{ $tag->name }} <span class="d-inline-block">({{ $tag->products_count }})</span></span></label>
-                </div>
-            @endforeach
-        </figure>
-    </aside>
-@endif
 
-<aside class="widget widget_shop">
+
+<aside class="widget widget_shop" style="display:none;">
     @if ($maxFilterPrice)
         <h4 class="widget-title">{{ __('By Price') }}</h4>
         <div class="widget__content nonlinear-wrapper">

@@ -141,6 +141,7 @@ class MainCheckout {
             }
 
             baseUrl = baseUrl + $.param($('form.checkout-form').serializeArray())
+       
 
             return baseUrl
         }

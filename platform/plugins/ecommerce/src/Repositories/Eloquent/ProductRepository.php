@@ -202,6 +202,7 @@ class ProductRepository extends RepositoriesAbstract implements ProductInterface
 
     public function getProductsByCollections(array $params)
     {
+       
         $params = array_merge([
             'collections' => [
                 'by' => 'id',

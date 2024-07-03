@@ -12,7 +12,7 @@
     @if ($products->isNotEmpty())
         <div class="row">
             @foreach($products as $product)
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-1 col-12">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-6">
                     <div class="ps-product">
                         {!! Theme::partial('product-item', compact('product')) !!}
                     </div>

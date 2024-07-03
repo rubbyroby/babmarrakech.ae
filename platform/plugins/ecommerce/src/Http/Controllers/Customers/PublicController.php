@@ -148,7 +148,7 @@ class PublicController extends Controller
         $orders = Order::query()
             ->where([
                 'user_id' => auth('customer')->id(),
-                'is_finished' => 1,
+                // 'is_finished' => 1,
             ])
             ->withCount(['products'])
             ->orderByDesc('created_at')

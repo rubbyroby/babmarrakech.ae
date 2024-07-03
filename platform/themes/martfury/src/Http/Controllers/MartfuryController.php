@@ -40,6 +40,7 @@ class MartfuryController extends PublicController
 
     public function ajaxGetProducts(Request $request)
     {
+      
         $products = get_products_by_collections([
             'collections' => [
                 'by' => 'id',

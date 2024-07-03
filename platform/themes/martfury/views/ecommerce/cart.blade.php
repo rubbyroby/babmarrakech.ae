@@ -1,7 +1,7 @@
 <div class="ps-section--shopping ps-shopping-cart pt-40">
     <div class="container">
         <div class="ps-section__header">
-            <h1>{{ __('Shopping Cart') }}</h1>
+            <h1 style="color:black !important">{{ __('Shopping Cart') }}</h1>
         </div>
         <div class="ps-section__content">
             <form class="form--shopping-cart" method="post" action="{{ route('public.cart.update') }}">
@@ -25,6 +25,57 @@
                                             @endphp
 
                                             @if (!empty($product))
+                                            
+                                                       <div class="mcart-item card mb-3 shopping-cart-display-mode" style="border: 2px solid #66666687;border-radius: 1em;">
+                    <div class="row no-gutters shopping-cart-display-mode justify-center">
+                        <div class="col-4 d-flex flex-row justify-content-center">
+                            <img src="{{ RvMedia::getImageUrl($cartItem->options['image'], 'thumb', false, RvMedia::getDefaultImage()) }}" class="card-img" alt="{{ $product->original_product->name }}">
+                        </div>
+                        <div class="mcart-item-details col-8">
+                            <div class="mcart-item-body card-body" style="margin-top:0px !important;">
+                                <div class=" d-flex flex-row items-content-start ml-10">
+                                    <h5 class="mcart-item-title card-title text-start" style="font-size:1.1em !important;color: #205044;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $product->original_product->name }}</h5>
+                                </div>
+                                
+                                    <p><small>{{ $cartItem->options['attributes'] ?? '' }}</small></p>
+                                <div class="row">
+                                        <div class="ps-table--shopping-cart col-12 d-flex flex-row align-items-center justify-content-between ml-10 mr-10">
+                                            <div>
+                                                <span class="mcart-item-text card-text"><small style="font-weight: bold; font-size: 10px;">{{ $product->store->name }}</small></span>
+                                            </div>
+                                            <div class="form-group--number product__qty col-sm-5">
+                                                <button class="up" style="background-color: #D9D9D9; border-radius: 50px; text-align: center">+</button>
+                                                <button class="down" style="background-color: #D9D9D9; border-radius: 50px; text-align: center">-</button>
+                                                <input type="number" class="form-control qty-input"  style="border: none;" min="1" value="{{ $cartItem->qty }}" title="{{ __('Qty') }}" name="items[{{ $key }}][values][qtyFromMobile]">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex flex-row justify-content-start ml-10">
+                                            <a href="#" data-url="{{ route('public.cart.remove', $cartItem->rowId) }}" class="remove-cart-button"><i class="icon-trash"></i> Remove</a>
+                                        </div>
+                                        <div class="col-12 d-flex flex-row align-items-center justify-content-center">
+                                            <div class="col-6 d-flex flex-column">
+                                                <span class="mcart-item-price-label card-text mt-3 d-flex flex-column justify-content-start align-items-start" style="font-size: 1.3em;"><small style="color: black; font-weight: bolder;">Price </small></span>
+                                                <span class="mcart-item-price card-text  d-flex flex-column justify-content-start  align-items-start" style="font-weight: bold; color: #205044;">AED {{ format_price($cartItem->price) }}</span>
+                                            </div>
+                                            <div class="col-6">
+                                                <span class="mcart-item-price-label card-text mt-3 d-flex flex-column justify-content-start align-items-start" style="font-size: 1.3em;"><small style="color: black; font-weight: bolder;">Subtotal </small></span>
+                                                <span class="mcart-item-price card-text d-flex flex-column justify-content-start  align-items-start" style="font-weight: bold; color: #205044;">AED {{ format_price($cartItem->price * $cartItem->qty) }}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12 d-flex flex-row justify-content-center">
+                                        
+                                      
+                                </div>
+                                
+                                </div>
+
+                              
+                        </div>
+                    </div>
+                </div>
+
+
                                                 <tr>
                                                     <td>
                                                         <input type="hidden" name="items[{{ $key }}][rowId]" value="{{ $cartItem->rowId }}">

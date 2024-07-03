@@ -1,7 +1,11 @@
 <div class="ps-product-list mb-60" style="margin:0px !important;">
     <div class="ps-container">
         <div class="ps-section__header">
-            <h3>Our Partners</h3>
+            @if(__("I'm shopping for...") == "I'm shopping for...")
+                <h3>Our Partners</h3>
+            @else
+                <h3>شركاؤنا</h3>
+            @endif
         </div>
     </div>
 </div>

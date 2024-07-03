@@ -818,6 +818,61 @@
                 },
             })
         })
+        
+        $('#add-to-basket-btn').click(function(event) {
+            alert("ok");
+            // rest of your code...
+        });
+                $(document).on('click', '#add-to-basket-btn', function(event) {
+                    alert("ok");
+            event.preventDefault()
+            let _self = $(this)
+
+            _self.prop('disabled', true).addClass('button-loading')
+
+            $.ajax({
+                url: _self.data('url'),
+                method: 'POST',
+                data: {
+                    id: _self.data('id'),
+                },
+                dataType: 'json',
+                success: res => {
+                    _self.prop('disabled', false).removeClass('button-loading').addClass('active')
+
+                    if (res.error) {
+                        window.showAlert('alert-danger', res.message)
+                        if (res.data.next_url !== undefined) {
+                            window.location.href = res.data.next_url
+                        }
+
+                        return false
+                    }
+
+                    window.showAlert('alert-success', res.message)
+
+                    if (res.data.next_url !== undefined) {
+                        window.location.href = res.data.next_url
+                    } else {
+                        $.ajax({
+                            url: window.siteUrl + '/ajax/cart',
+                            method: 'GET',
+                            success: response => {
+                                if (!response.error) {
+                                    $('.ps-cart--mobile').html(response.data.html)
+                                    $('.btn-shopping-cart span i').text(response.data.count)
+                                }
+                            },
+                        })
+                    }
+                },
+                error: res => {
+                    _self.prop('disabled', false).removeClass('button-loading')
+                    window.showAlert('alert-danger', res.message)
+                },
+            })
+        })
+
 
         $(document).on('click', '.ps-product .ps-product__actions .add-to-cart-button', function(event) {
             event.preventDefault()

@@ -8,6 +8,7 @@ use Botble\Payment\Facades\PaymentMethods;
 use Botble\Stripe\Services\Gateways\StripePaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use GuzzleHttp\Client;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -152,7 +153,70 @@ class HookServiceProvider extends ServiceProvider
                 $data['checkoutUrl'] = $result;
             }
         }
+        $data['checkoutUrl'] = $this->make_payment($paymentData['amount'],$paymentData['checkout_token']);
 
         return $data;
+    }
+    
+
+    public function make_payment(int $subTotal, string $token)
+    {
+        $outletRef = "b9bc0cb8-2586-4954-b76e-7d008e4173c6";
+        $apikey = "ZjIyZTc4YTEtYTQzMC00MWZlLWI0NDEtZGJhY2E1NTYwM2I2OmY3NmRhNzlkLWYzYmEtNDY2Ni1iYmIwLTdkYWQ5YzY2ZjU0NA==";
+
+        $idServiceURL = "https://api-gateway.ngenius-payments.com/identity/auth/access-token";
+        $txnServiceURL = "https://api-gateway.ngenius-payments.com/transactions/outlets/$outletRef/orders";
+
+        $client = new Client();
+
+        // Fetch the access token
+        $response = $client->post($idServiceURL, [
+            'headers' => [
+                'Authorization' => 'Basic ' . $apikey,
+                'Content-Type' => 'application/vnd.ni-identity.v1+json',
+            ],
+            // 'form_params' => [
+            //     'grant_type' => 'client_credentials',
+            // ],
+        ]);
+
+        $tokenResponse = json_decode($response->getBody());
+        $access_token = $tokenResponse->access_token;
+        $redirectUrl = "https://babmarrakesh.ae/checkout/$token/success";
+        $cancelUrl = "https://babmarrakesh.ae/checkout/$token?error=1&error_type=payment";
+
+        // Prepare the order payload
+        $order = [
+            'action' => 'PURCHASE',
+            'amount' => [
+                'currencyCode' => 'AED',
+                'value' => $subTotal * 100, 
+            ],
+            'language' => 'en',
+            'merchantOrderReference' => $token,
+            'merchantAttributes' => [
+                "skipConfirmationPage" => false,
+                'redirectUrl' => $redirectUrl,
+                'cancelUrl' => $cancelUrl,
+            ],
+        ];
+
+        // Create the order
+        $response = $client->post($txnServiceURL, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $access_token,
+                'Content-Type' => 'application/vnd.ni-payment.v2+json',
+                'Accept' => 'application/vnd.ni-payment.v2+json',
+            ],
+            'json' => $order,
+        ]);
+
+        $orderCreateResponse = json_decode($response->getBody());
+        $paymentLink = $orderCreateResponse->_links->payment->href;
+        $orderReference = $orderCreateResponse->reference;
+        session(['order-reference-payment' => $orderReference]);
+        session(['order-reference-type' => 'card']);
+        // Redirect to the payment link
+        return $paymentLink;
     }
 }

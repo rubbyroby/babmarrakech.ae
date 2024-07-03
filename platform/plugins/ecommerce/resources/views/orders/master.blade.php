@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-
+    
     @stack('footer')
 
     {!! Html::script('vendor/core/plugins/ecommerce/js/utilities.js') !!}

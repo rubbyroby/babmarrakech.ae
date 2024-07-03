@@ -21,9 +21,9 @@
                 <a class="add-to-cart-button btn" href="#" data-url="{{ route('public.compare.add', $product->id) }}" title="{{ __('Compare') }}"><img src="https://arabna.shop/storage/compare-icon-1.png" alt="Cart" style="height: 40px;"></a>
             @endif
             @if (EcommerceHelper::isWishlistEnabled())
-                <a class="js-add-to-wishlist-button btn" href="#" data-url="{{ route('public.wishlist.add', $product->id) }}" title="{{ __('Add to Wishlist') }}"><img src="https://arabna.shop/storage/love-icon.png" alt="Cart" class="wish_img_btn" style="width: 30px; height: 30px;"></a>
+                <a class="js-add-to-wishlist-button btn" href="#" data-url="{{ route('public.wishlist.add', $product->id) }}" title="{{ __('Add to Wishlist') }}"><img src="{{URL::to('/storage/love-icon.png')}}" alt="Cart" class="wish_img_btn" style="width: 30px; height: 30px;"></a>
             @endif
-            <a class="js-quick-view-button btn"  href="#" data-url="{{ route('public.ajax.quick-view', $product->id) }}" title="{{ __('Quick View') }}"><img src="https://arabna.shop/storage/eye-icon.png" alt="Cart" class="view_product_img_btn" style="width: 30px; height: 30px;"></a>
+            <a class="js-quick-view-button btn"  href="#" data-url="{{ route('public.ajax.quick-view', $product->id) }}" title="{{ __('Quick View') }}"><img src="{{URL::to('/storage/eye-icon.png')}}" alt="Cart" class="view_product_img_btn" style="width: 30px; height: 30px;"></a>
         </div>
 
         <a href="{{ $product->url }}">
@@ -48,15 +48,15 @@
         
 
         <div spellcheck="z-index:1;">
-            @if (is_plugin_active('marketplace') && $product->store->id)
-            <span class="shop-name-title"><a class="shop-name-title" href="{{ $product->store->url }}">{{ $product->store->name }}</a></span>
-            @endif
+            
+            <span class="shop-name-title"><strong><a class="shop-name-title" href="{{ url('/products') }}?brands%5B%5D={{ $product->brand_id }}">{{ $product->brand->name }}</a></strong></span>
+                <hr style="height: 1px; background-color: #cbcbcb; border: none; margin-top: 5px; margin-bottom: 5px;"/>
 
             <a class="ps-product__title" href="{{ $product->url }}" style="color: black;"><h3 class="product-card-title"> <span class="span-product-name">{!! BaseHelper::clean($product->name) !!}</span></h3></a>
             <p class="product-price @if ($product->front_sale_price !== $product->price) sale @endif" style="color: red; font-size: 28px; margin-top: 0px; font-style: oblique; font-weight: bold; line-height: 1em;"><span style="font-size: 14px; font-weight: 500; font-style: oblique; margin-right: 3px;">AED</span>{{ format_price($product->front_sale_price_with_taxes) }} @if ($product->front_sale_price !== $product->price) <del style="color: rgba(0,0,0,0.5) ;font-size: 14px; font-weight: 500; font-style: oblique;"><span style="margin-right: 3px;">AED</span>{{ format_price($product->price_with_taxes) }} </del> @endif</p>
         </div>
         <div>
-        <a class="btn add-to-basket-btn" id="add-to-basket-btn" data-id="{{ $product->id }}" href="#" data-url="{{ route('public.cart.add-to-cart') }}" style="display: inline-flex; align-items: center; text-decoration: none;"> <img src="https://arabna.shop/storage/shop-icon.png" alt="Shop Icon" style="height: 16px; width: auto; margin-right: 5px;"> Add To Basket </a>
+        <a class="btn add-to-basket-btn" id="add-to-basket-btn" data-id="{{ $product->id }}" href="#" data-url="{{ route('public.cart.add-to-cart') }}" style="display: inline-flex; align-items: center; text-decoration: none;"> <img src="{{URL::to('/storage/shop-white-icon.png')}}" alt="Shop Icon" style="height: 16px; width: auto; margin-right: 5px;"> Add To Basket </a>
         </div>
         </div>
         </div>

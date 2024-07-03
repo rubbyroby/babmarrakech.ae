@@ -245,6 +245,14 @@ class PublicCartController extends Controller
             if (! $cartItem) {
                 continue;
             }
+            
+            if($this->isMobileDevice($request->header('User-Agent'))){
+                $result = (int)Arr::get($item, 'values.qtyFromMobile', 0);
+                $item['values']['qty']  = (string)$result;
+            }else{
+                $result = (int)Arr::get($item, 'values.qty', 0);
+                $item['values']['qtyFromMobile']  = (string)$result;
+            }
 
             $product = Product::query()->find($cartItem->id);
 
@@ -284,6 +292,21 @@ class PublicCartController extends Controller
                 'content' => Cart::instance('cart')->content(),
             ])
             ->setMessage(__('Update cart successfully!'));
+    }
+    
+    
+
+    private function isMobileDevice($userAgent)
+    {
+        $mobileKeywords = ['Mobile', 'Android', 'iPhone', 'iPad', 'Windows Phone', 'BlackBerry'];
+
+        foreach ($mobileKeywords as $keyword) {
+            if (strpos($userAgent, $keyword) !== false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function destroy(string $id, BaseHttpResponse $response)

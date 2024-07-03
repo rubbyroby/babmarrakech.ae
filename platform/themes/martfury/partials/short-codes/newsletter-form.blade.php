@@ -1,4 +1,4 @@
-<div class="ps-newsletter mt-40" style="background-image:url('https://arabna.shop/storage/footer-bg.png')">
+<div class="ps-newsletter mt-40" style="background-image:url('https://babmarrakesh.ae/storage/website-assets/green-footer-bg.png')">
     <div class="ps-container newsletter-form">
         <form class="ps-form--newsletter" method="post" action="{{ route('public.newsletter.subscribe') }}">
             @csrf

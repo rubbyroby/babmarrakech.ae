@@ -48,6 +48,7 @@ class Product extends BaseModel
         'with_storehouse_management',
         'is_featured',
         'brand_id',
+        'brand_name',
         'is_variation',
         'sale_type',
         'price',
